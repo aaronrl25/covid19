@@ -42,16 +42,11 @@ if(!stats) {
                 <Text
                 key={code}
                 value={stats.iso3[code]}
-
-                  onPress={() => {
-                    this.props.navigation.navigate('BoardDetails', {
-                   code: `${JSON.stringify(country.key)}`,
-                    });
-                  }}
+                
                   >
                     
                     <Text>{country}</Text>
-                
+
                 </Text>
                 </Card>
 

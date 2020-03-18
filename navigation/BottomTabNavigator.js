@@ -3,6 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/detail';
+import Links from '../screens/LinksScreen';
+import about from '../screens/about';
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -20,23 +22,31 @@ export default function BottomTabNavigator({ navigation, route }) {
         component={HomeScreen}
         options={{
           title: 'COVID-19',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />,
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-analytics" />,
         }}
       />
       <BottomTab.Screen
         name="news"
         component={LinksScreen}
         options={{
-          title: 'News',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+          title: 'Countries',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-cloud" />,
         }}
       />
        <BottomTab.Screen
         name="health care"
-        component={LinksScreen}
+        component={Links}
         options={{
-          title: 'Health care',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-info" />,
+          title: 'about',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-information" />,
+        }}
+      />
+       <BottomTab.Screen
+        name="about"
+        component={about}
+        options={{
+          title: 'about',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-information" />,
         }}
       />
     </BottomTab.Navigator>

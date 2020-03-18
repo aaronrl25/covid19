@@ -1,116 +1,149 @@
-import * as React from 'react';
-import { Ionicons } from '@expo/vector-icons';
-import * as WebBrowser from 'expo-web-browser';
-import { RectButton, ScrollView } from 'react-native-gesture-handler';
-import { Image, Platform, StyleSheet, TouchableOpacity, View,Picker } from 'react-native';
-import { List, ListItem, Text, Card, Button  } from 'react-native-elements';
-import { useState,useEffect } from 'react';
+import * as React from "react";
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Text
+} from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import { LinearGradient } from "expo-linear-gradient";
+import * as WebBrowser from "expo-web-browser";
+import { useState, useEffect } from "react";
+import rgba from "hex-to-rgba";
+import * as Icon from "react-native-vector-icons";
 
-function useStats(){
-  const [stats ,setStats]= useState();
-  useEffect(()=>{
-    async function fetchData(){
-    
-    console.log('fetching data');
-   const data=await fetch("https://covid19.mathdro.id/api/countries/").then
-    (res=>res.json()
-    
-    
-    );
-    setStats(data);
+import {
+  AdMobBanner,
+  AdMobInterstitial,
+  PublisherBanner,
+  AdMobRewarded
+} from "react-native-admob";
+
+import { Block, Badge, Card } from "../components";
+
+import { MonoText } from "../components/StyledText";
+import { theme } from "../constants";
+import { WebView } from 'react-native-webview';
+function useStats() {
+  const [stats, setStats] = useState();
+  useEffect(() => {
+    async function fetchData() {
+      console.log("fetching data");
+      const data = await fetch("https://covid19.mathdro.id/api/countries/MX").then(res =>
+        res.json()
+      );
+      setStats(data);
+    }
+    fetchData();
+  }, []);
+  return stats;
+}
+
+function Stats() {
+  const stats = useStats();
+  console.log(stats);
+
+  if (!stats) {
+    return <Text style={styles.developmentModeText}>loading</Text>;
   }
-  fetchData();
-},[]);
-return stats;
-}
-function Stats(){
-  const stats=useStats();
- console.log(stats);
-
-if(!stats) {
   return (
-    
-    <Text style={styles.developmentModeText}>
-      loading
-    </Text>
-  );
-}
-  return (
-        
-<ListItem>
+    <ScrollView style={styles.container}>
+      <LinearGradient
+        end={{ x: 1, y: 0 }}
+        style={styles.welcome}
+        colors={["#8afffd", theme.colors.gray]}
+      >
+        <Block middle flex={0.4}>
+          <Badge color={rgba(theme.colors.white, "0.2")} size={72}>
+            <Badge color={rgba(theme.colors.white, "0.2")} size={52}>
+              <Icon.FontAwesome
+                name="star"
+                color="white"
+                size={theme.sizes.h2}
+              />
+            </Badge>
+          </Badge>
+        </Block>
+        <Block middle>
+          <Text style={styles.textTitle}>Aaron Ramirez </Text>
+          <Text style={styles.textTitle}>Franz Andrusch</Text>
 
- {Object.entries(stats.countries).map(([country, code]) => (
-               <Text value={code}>
-                 {country}
-                 </Text>
+          <Text style={styles.textTitle}>Eurybia studio 2020</Text>
+        </Block>
+      </LinearGradient>
 
-        
-    ))}
-</ListItem>
-         
+      <TouchableOpacity
+        activeOpacity={0.8}
+        //OnPress={() => navigation.navigate("pantalla")}
+      >
+        <Card shadow style={{ paddingVertical: theme.sizes.padding }}>
 
-
-
-      
-  );
-
-}
-export default function LinksSceen() {
-  return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-               <Stats></Stats>
+          <Block>
+            <Block center>
+            </Block>
+          </Block>
+        </Card>
+      </TouchableOpacity>
 
     </ScrollView>
   );
 }
 
-function OptionButton({ icon, label, onPress, isLastOption }) {
-  return (
-    <RectButton style={[styles.option, isLastOption && styles.lastOption]} onPress={onPress}>
-      <View style={{ flexDirection: 'row' }}>
-        <View style={styles.optionIconContainer}>
-          <Ionicons name={icon} size={22} color="rgba(0,0,0,0.35)" />
-        </View>
-        <View style={styles.optionTextContainer}>
-          <Text style={styles.optionText}>{label}</Text>
-          
-        </View>
-      </View>
-    </RectButton>
-  );
+export default function HomeScreen() {
+  return       <WebView source={{ uri: 'https://eurybiastudio.com' }} />;
+
+  <Stats></Stats>;
+  
+  
 }
+
+HomeScreen.navigationOptions = {
+  header: null
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fafafa',
+    paddingVertical: theme.sizes.padding,
+    paddingHorizontal: theme.sizes.padding,
+    backgroundColor: theme.colors.gray4
   },
-  contentContainer: {
-    paddingTop: 15,
+  welcome: {
+    flexDirection: "row",
+    borderRadius: theme.sizes.border,
+    padding: theme.sizes.base + 4,
+    marginBottom: theme.sizes.base
   },
-  optionIconContainer: {
-    marginRight: 12,
+  textTitle: {
+    letterSpacing: 0.4,
+    fontWeight: "500",
+    fontSize: theme.sizes.base,
+    color: theme.colors.white
+  },
+  textData: {
+    fontSize: theme.sizes.h1,
+    letterSpacing: 1.7,
+    color: theme.colors.primary
+  },
+  textDataSub: {
+    letterSpacing: 0.7
+  },
+  textSubTitle: {
+    letterSpacing: 0.4,
+    textTransform: "uppercase"
+  },
+  developmentModeText: {
+    marginBottom: 20,
+    color: "rgba(0,0,0,0.4)",
+    fontSize: 14,
+    lineHeight: 19,
+    textAlign: "center"
   },
   getStartedText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    color: "rgba(96,100,109, 1)",
     lineHeight: 24,
-    textAlign: 'center',
-  },
-  option: {
-    backgroundColor: '#fdfdfd',
-    paddingHorizontal: 15,
-    paddingVertical: 15,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderBottomWidth: 0,
-    borderColor: '#ededed',
-  },
-  lastOption: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  optionText: {
-    fontSize: 15,
-    alignSelf: 'flex-start',
-    marginTop: 1,
-  },
+    textAlign: "center"
+  }
 });
