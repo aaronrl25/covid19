@@ -64,12 +64,7 @@ if(!stats) {
   recovered {stats.recovered.value}
 </Text>
 </Card>
-<Card style={styles.container}>
 
-<Text style={styles.getStartedText}>
-  recovered {stats.recovered.value}
-</Text>
-</Card>
 
 
       </View>

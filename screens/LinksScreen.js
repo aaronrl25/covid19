@@ -5,7 +5,6 @@ import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import { Image, Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { List, ListItem, Text, Card, Button } from 'react-native-elements';
 import { useState,useEffect } from 'react';
-import { Picker } from "native-base";
 
 function useStats(){
   const [stats ,setStats]= useState();
@@ -28,7 +27,7 @@ function Stats(){
   const stats=useStats();
  console.log(stats);
 
-if(!countries) {
+if(!stats) {
   return (
     
     <Text style={styles.developmentModeText}>
@@ -41,29 +40,18 @@ if(!countries) {
           <Card style={styles.container}>
 
     <Text style={styles.getStartedText}>
-      confirirmed {stats.c.value}
     </Text>
     </Card>
     <Card style={styles.container}>
 
 <Text style={styles.getStartedText}>
-  Deaths {stats.deaths.value}
+  Deaths {stats.USA.value}
 </Text>
 </Card>
     {/* Deaths{stats.deaths.value}.
       recovered{stats.recovered.value} */}
-          <Card style={styles.container}>
 
-<Text style={styles.getStartedText}>
-  recovered {stats.recovered.value}
-</Text>
-</Card>
-<Card style={styles.container}>
 
-<Text style={styles.getStartedText}>
-  recovered {stats.recovered.value}
-</Text>
-</Card>
 
 
       </View>
