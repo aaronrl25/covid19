@@ -3,6 +3,8 @@ import { Image, Platform, StyleSheet, TouchableOpacity, View } from 'react-nativ
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 import { List, ListItem, Text, Card, Button } from 'react-native-elements';
+import { useState,useEffect } from 'react';
+
 import {
   AdMobBanner,
   AdMobInterstitial,
@@ -11,47 +13,83 @@ import {
 } from 'react-native-admob'
 
 import { MonoText } from '../components/StyledText';
+function useStats(){
+  const [stats ,setStats]= useState();
+  useEffect(()=>{
+    async function fetchData(){
+    
+    console.log('fetching data');
+   const data=await fetch('https://covid19.mathdro.id/api').then
+    (res=>res.json()
+    
+    
+    );
+    setStats(data);
+  }
+  fetchData();
+},[]);
+return stats;
+}
+function Stats(){
+  const stats=useStats();
+ console.log(stats);
+
+if(!stats) {
+  return (
+    
+    <Text style={styles.developmentModeText}>
+      loading
+    </Text>
+  );
+}
+  return (
+    <View style={styles.container}>
+          <Card style={styles.container}>
+
+    <Text style={styles.getStartedText}>
+      confirirmed {stats.confirmed.value}
+    </Text>
+    </Card>
+    <Card style={styles.container}>
+
+<Text style={styles.getStartedText}>
+  Deaths {stats.deaths.value}
+</Text>
+</Card>
+    {/* Deaths{stats.deaths.value}.
+      recovered{stats.recovered.value} */}
+          <Card style={styles.container}>
+
+<Text style={styles.getStartedText}>
+  recovered {stats.recovered.value}
+</Text>
+</Card>
+
+      </View>
+  );
+
+}
+
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <AdMobBanner
-  adSize="fullBanner"
-  adUnitID="your-admob-unit-id"
-  testDevices={[AdMobBanner.simulatorId]}
-  onAdFailedToLoad={error => console.error(error)}
-/>
+      {/*  */}
 
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
 
-
         <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
 
-          <Text style={styles.getStartedText}>COVID 19</Text>
+          <Stats></Stats>
 
           <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
           </View>
 
-          <Text style={styles.getStartedText}>
-            corona virus cases 
-
-          </Text>
-          <Text style={styles.getStartedText}>
-
-         Deaths 
-
-          </Text>
-          <Text style={styles.getStartedText}>
-
- Recovered
-            
- </Text>
+         
+        
         </View>
 
         <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-          </TouchableOpacity>
         </View>
       </ScrollView>
 
@@ -64,36 +102,6 @@ HomeScreen.navigationOptions = {
   header: null,
 };
 
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-      </Text>
-    );
-  }
-}
-
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/workflow/development-mode/');
-}
-
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/get-started/create-a-new-app/#making-your-first-change'
-  );
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -183,3 +191,4 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
 });
+
