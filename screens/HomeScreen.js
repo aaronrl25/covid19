@@ -89,30 +89,24 @@ function Stats() {
 
       <React.Fragment>
         <Block style={{ marginBottom: theme.sizes.base }}>
-          <Text style={styles.textSubTitle}>Recovered</Text>
         </Block>
         <Card shadow>
-          <Block
-            row
-            space="between"
-            style={{ marginBottom: theme.sizes.base, justifyContent: "center" }}
-          >
+          <Block center>
             <Text style={styles.textData}>{stats.recovered.value}</Text>
+            <Text style={styles.textSubTitle}>Recovered</Text>
+
           </Block>
         </Card>
       </React.Fragment>
 
       <React.Fragment>
         <Block style={{ marginBottom: theme.sizes.base }}>
-          <Text style={styles.textSubTitle}>Deaths</Text>
         </Block>
         <Card shadow>
-          <Block
-            row
-            space="between"
-            style={{ marginBottom: theme.sizes.base, justifyContent: "center" }}
-          >
+          <Block center>
             <Text style={styles.textData}>{stats.deaths.value}</Text>
+            <Text style={styles.textSubTitle}>Deaths</Text>
+
           </Block>
         </Card>
       </React.Fragment>

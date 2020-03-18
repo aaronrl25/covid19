@@ -5,7 +5,6 @@ import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import { Image, Platform, StyleSheet, TouchableOpacity, View,Picker } from 'react-native';
 import { List, ListItem, Text, Card, Button  } from 'react-native-elements';
 import { useState,useEffect } from 'react';
-import { Block, Badge, Card } from "../components";
 
 function useStats(){
   const [stats ,setStats]= useState();

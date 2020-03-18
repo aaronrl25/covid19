@@ -5,7 +5,6 @@ import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import { Image, Platform, StyleSheet, TouchableOpacity, View,Picker } from 'react-native';
 import { List, ListItem, Text, Card, Button  } from 'react-native-elements';
 import { useState,useEffect } from 'react';
-import { Block, Badge, Card } from "../components";
 
 function useStats(){
   const [stats ,setStats]= useState();
@@ -13,7 +12,7 @@ function useStats(){
     async function fetchData(){
     
     console.log('fetching data');
-   const data=await fetch("https://covid19.mathdro.id/api/countries/").then
+   const data=await fetch("https://covid19.mathdro.id/api/countries").then
     (res=>res.json()
     
     
@@ -29,26 +28,41 @@ function Stats(){
  console.log(stats);
 
 if(!stats) {
-  return (
-    
-    <Text style={styles.developmentModeText}>
-      loading
+  return (<Text style={styles.developmentModeText}> loading
     </Text>
   );
 }
   return (
-        
-<ListItem>
+    <View style={styles.container}>
+           <View>
 
- {Object.entries(stats.countries).map(([country, code]) => (
-               <Text value={code}>
-                 {country}
-                 </Text>
+                      {Object.entries(stats.countries).map(([country, code]) => (
+                                                <Card>
 
-        
-    ))}
-</ListItem>
-         
+                <Text
+                key={code}
+                value={stats.iso3[code]}
+
+                  onPress={() => {
+                    this.props.navigation.navigate('BoardDetails', {
+                   code: `${JSON.stringify(country.key)}`,
+                    });
+                  }}
+                  >
+                    
+                    <Text>{country}</Text>
+                
+                </Text>
+                </Card>
+
+              ))
+            }
+
+          </View>
+      
+
+        </View>
+    
 
 
 

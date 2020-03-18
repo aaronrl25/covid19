@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import LinksScreen from '../screens/detail';
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -36,7 +36,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         component={LinksScreen}
         options={{
           title: 'Health care',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-heart" />,
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-info" />,
         }}
       />
     </BottomTab.Navigator>
