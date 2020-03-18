@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
-import { Image, Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { List, ListItem, Text, Card, Button } from 'react-native-elements';
+import { Image, Platform, StyleSheet, TouchableOpacity, View,Picker } from 'react-native';
+import { List, ListItem, Text, Card, Button  } from 'react-native-elements';
 import { useState,useEffect } from 'react';
 
 function useStats(){
@@ -12,7 +12,7 @@ function useStats(){
     async function fetchData(){
     
     console.log('fetching data');
-   const data=await fetch('https://covid19.mathdro.id/api/countries').then
+   const data=await fetch("https://covid19.mathdro.id/api/countries/").then
     (res=>res.json()
     
     
@@ -37,24 +37,18 @@ if(!stats) {
 }
   return (
     <View style={styles.container}>
-          <Card style={styles.container}>
+         
+         <Text style={styles.developmentModeText}>
+          {stats.countries.value}
 
-    <Text style={styles.getStartedText}>
     </Text>
-    </Card>
-    <Card style={styles.container}>
 
-<Text style={styles.getStartedText}>
-  Deaths {stats.USA.value}
-</Text>
-</Card>
-    {/* Deaths{stats.deaths.value}.
-      recovered{stats.recovered.value} */}
+        </View>
+    
 
 
 
-
-      </View>
+      
   );
 
 }
@@ -76,6 +70,7 @@ function OptionButton({ icon, label, onPress, isLastOption }) {
         </View>
         <View style={styles.optionTextContainer}>
           <Text style={styles.optionText}>{label}</Text>
+          
         </View>
       </View>
     </RectButton>
@@ -92,6 +87,12 @@ const styles = StyleSheet.create({
   },
   optionIconContainer: {
     marginRight: 12,
+  },
+  getStartedText: {
+    fontSize: 17,
+    color: 'rgba(96,100,109, 1)',
+    lineHeight: 24,
+    textAlign: 'center',
   },
   option: {
     backgroundColor: '#fdfdfd',

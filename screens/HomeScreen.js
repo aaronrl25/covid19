@@ -78,25 +78,18 @@ export default function HomeScreen() {
     <View style={styles.container}>
       {/*  */}
 
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
 
-        <View style={styles.getStartedContainer}>
 
           <Stats></Stats>
 
-          <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-          </View>
-
+         
          
         
         </View>
 
-        <View style={styles.helpContainer}>
-        </View>
-      </ScrollView>
+       
 
      
-    </View>
   );
 }
 
