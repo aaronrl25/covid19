@@ -31,7 +31,7 @@ function useStats() {
   useEffect(() => {
     async function fetchData() {
       console.log("fetching data");
-      const data = await fetch("https://covid19.mathdro.id/api/M").then(res =>
+      const data = await fetch("https://covid19.mathdro.id/api/countries/USA").then(res =>
         res.json()
       );
       setStats(data);

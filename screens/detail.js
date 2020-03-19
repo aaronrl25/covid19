@@ -32,6 +32,7 @@ if(!stats) {
     </Text>
   );
 }
+// just create an on prres and that all     make a key code country url={`https://covid19.mathdro.id/api/countries/${selectedCountry}`}
   return (
     <View style={styles.container}>
            <View>
