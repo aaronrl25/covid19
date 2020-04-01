@@ -12,7 +12,7 @@ function useStats(){
     async function fetchData(){
     
     console.log('fetching data');
-   const data=await fetch("https://covid19.mathdro.id/api/countries").then
+   const data=await fetch("https://covid19.mathdro.id/api").then
     (res=>res.json()
     
     
@@ -37,19 +37,18 @@ if(!stats) {
     <View style={styles.container}>
            <View>
 
-                      {Object.entries(stats.countries).map(([country, code]) => (
-                                                <Card>
 
-                <Text
+                <Picker
                 key={code}
                 value={stats.iso3[code]}
                 
                   >
-                    
+                                          {Object.entries(stats.countries).map(([country, code]) => (
+
+                                   <Picker.Item label = "Maria" value = "maria" />
                     <Text>{country}</Text>
 
-                </Text>
-                </Card>
+                </Picker>
 
               ))
             }
